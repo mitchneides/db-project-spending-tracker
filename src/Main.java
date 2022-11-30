@@ -14,7 +14,7 @@ public class Main {
         System.out.println("********* Welcome to the Spending Tracker *********");
         System.out.println();
         AppLogin appLogin = new AppLogin();
-        appLogin.getUserID(conn);
+        int userID = appLogin.getUserID(conn);
 
         // begin execution flow
 //        while(true) {
