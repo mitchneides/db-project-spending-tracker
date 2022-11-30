@@ -105,7 +105,6 @@ public class GroceryType {
 
         // ask user to choose a grocery type or create new
         int gType = getUserChoice(allGTypes, conn);
-        System.out.println(gType);
         return gType;
     }
 }

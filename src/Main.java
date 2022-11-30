@@ -96,7 +96,7 @@ public class Main {
                 if (inputChoice == 1) {
                     // input purchase
                     Purchase purchase = new Purchase();
-//                    purchase.start(conn);
+                    purchase.start(conn, userID);
 
 
 
