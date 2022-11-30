@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
 
@@ -34,16 +36,39 @@ public class Purchase {
 
     private static String createTransactCommand(Connection conn, int userId, int itemID) throws SQLException {
         Scanner uIn = new Scanner(System.in);
-        // ask for price
-        System.out.print("\nPlease enter the price of the purchase (format: dollars.cents): ");
-        String price = uIn.nextLine();
+        String price = "";
+        while (true) {
+            // ask for price
+            System.out.print("\nPlease enter the price of the purchase (format: dollars.cents): ");
+            try {
+                Double p = Double.valueOf(uIn.nextLine());
+                price += p;
+                break;
+            } catch (Exception e) {
+                System.out.println("Please ensure your input is formatted correctly!");
+            }
+        }
+
         // ask for vendor id
         Vendor v = new Vendor();
         int vid = v.getVendor(conn);
-        // ask for date
-        System.out.print("\nPlease enter the date of the purchase (format: yyyy-mm-dd): ");
-        String date = uIn.nextLine();
 
+        String date = "";
+        while (true) {
+            // ask for date
+            System.out.print("\nPlease enter the date of the purchase (format: yyyy-mm-dd): ");
+            try {
+                String dIn = uIn.nextLine();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                dateFormat.setLenient(false);
+                dateFormat.parse(dIn.toString());
+                date += dIn;
+                System.out.println(date);
+                break;
+            } catch (ParseException pe) {
+                System.out.println("Please ensure your input is formatted correctly!");
+            }
+        }
         return "INSERT INTO transact (user_id, vendor_id, item_id, transact_date, price)" +
                 " VALUES (" + userId + ", " + vid + ", " + itemID + ", '" + date + "', " + price + ")";
     }
