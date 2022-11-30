@@ -34,7 +34,7 @@ public class DBConnect {
         connectionProps.put("password", this.dbPassword);
         conn = DriverManager.getConnection("jdbc:mysql://"
                         + this.serverName + ":" + this.portNumber + "/" +
-                        this.dbName + "?characterEncoding=UTF-8&useSSL=false",
+                        this.dbName + "?allowPublicKeyRetrieval=true&characterEncoding=UTF-8&useSSL=false",
                 connectionProps);
         return conn;
     }
