@@ -79,6 +79,9 @@ public class Main {
         AppLogin appLogin = new AppLogin();
         int userID = appLogin.getUserID(conn);
 
+        GroceryType gt = new GroceryType();
+        gt.getGroceryType(conn);
+
         // begin execution flow
         while (true) {
             // display menu
