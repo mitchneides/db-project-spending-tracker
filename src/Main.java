@@ -1,3 +1,10 @@
+import Consumption.Consumption;
+import Login.AppLogin;
+import Login.DBConnect;
+import Purchase.GroceryType;
+import Purchase.Purchase;
+import Report.Report;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Scanner;
