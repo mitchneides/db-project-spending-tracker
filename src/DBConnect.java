@@ -14,23 +14,16 @@ public class DBConnect {
 
 
     public void dbLogin() {
+        Scanner userIn = new Scanner(System.in);
+        System.out.print("Enter MySQL username: ");
+        String uName = userIn.nextLine();
+        System.out.println();
+        System.out.print("Enter MySQL password: ");
+        String pWord = userIn.nextLine();
+        System.out.println();
 
-
-//        COMMENTED OUT FOR DEV:
-//        Scanner userIn = new Scanner(System.in);
-//        System.out.print("Enter MySQL username: ");
-//        String uName = userIn.nextLine();
-//        System.out.println();
-//        System.out.print("Enter MySQL password: ");
-//        String pWord = userIn.nextLine();
-//        System.out.println();
-//
-//        this.dbUserName = uName;
-//        this.dbPassword = pWord;
-
-
-        this.dbUserName = "root";
-        this.dbPassword = "MgN130458!";
+        this.dbUserName = uName;
+        this.dbPassword = pWord;
     }
 
     public Connection getConnection() throws SQLException {
