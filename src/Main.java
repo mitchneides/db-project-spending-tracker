@@ -98,8 +98,6 @@ public class Main {
                     Purchase purchase = new Purchase();
                     purchase.start(conn, userID);
 
-
-
                 } else {
                     // input consumption
                     Consumption consumption = new Consumption();
