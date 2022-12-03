@@ -101,7 +101,7 @@ public class Main {
                 } else {
                     // input consumption
                     Consumption consumption = new Consumption();
-//                    consumption.start(conn);
+                    consumption.start(conn, userID);
 
 
 
