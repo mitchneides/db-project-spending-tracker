@@ -43,7 +43,7 @@ public class Consumption {
             Scanner userIn = new Scanner(System.in);
             System.out.println();
             System.out.print("Please enter the ID that matches the item you are consuming\n" +
-                             "(Or enter -1 to cancel): ");
+                             "(Or enter -1 to cancel and return to main menu): ");
 
             Integer gtID;
             try {
@@ -87,49 +87,59 @@ public class Consumption {
     }
 
     public static void start(Connection conn, int userID) throws SQLException {
-        // get user's grocery stock (grocery type list where qty > 0)
-        String command = "SELECT * FROM grocery_types WHERE remaining_qty > 0;";
-        Map<Integer, List<String>> stock = getAllStockedGroceryTypes(conn, command);
-
-        // get user's consumption item
-        // list format: [id, qty]
-        List<Integer> choice = getUserChoice(stock, conn);
-        if (choice.get(0) == -1) {
-            return;
-        }
-
-        int itemPK = choice.get(0);
-        int old_qty = choice.get(1);
-        int new_qty = -1;
-        // get/validate consumption quantity
-        int qty_consumed = -1;
         while (true) {
-            Scanner userIn = new Scanner(System.in);
-            System.out.print("\nPlease enter the quantity consumed: ");
-            try {
-                qty_consumed = Integer.parseInt(userIn.nextLine());
-            } catch (Exception e) {
-                System.out.println("\nAn integer must be entered. Please try again...");
-                continue;
+            // get user's grocery stock (grocery type list where qty > 0)
+            String command = "SELECT * FROM grocery_types WHERE remaining_qty > 0;";
+            Map<Integer, List<String>> stock = getAllStockedGroceryTypes(conn, command);
+
+            // get user's consumption item
+            // list format: [id, qty]
+            List<Integer> choice = getUserChoice(stock, conn);
+            if (choice.get(0) == -1) {
+                return;
             }
-            if (qty_consumed > choice.get(1)) {
-                System.out.println("\nQuantity cannot exceed the amount you have stocked. Please try again...");
-                continue;
-            }
-            if (qty_consumed < 1) {
-                System.out.println("\nQuantity consumed must be at least 1. Please try again...");
-                continue;
-            } else {
-                new_qty = old_qty - qty_consumed;
-                // alert user that they are low if qty is below 3
-                if (new_qty < 3) {
-                    System.out.println("\nALERT: You're stock is running low! You may want to add this item" +
-                            " to your shopping list!");
+
+            int itemPK = choice.get(0);
+            int old_qty = choice.get(1);
+            int new_qty = -1;
+            // get/validate consumption quantity
+            int qty_consumed = -1;
+            while (true) {
+                Scanner userIn = new Scanner(System.in);
+                System.out.print("\nPlease enter the quantity consumed (or -1 to cancel): ");
+                try {
+                    qty_consumed = Integer.parseInt(userIn.nextLine());
+                } catch (Exception e) {
+                    System.out.println("\nAn integer must be entered. Please try again...");
+                    continue;
                 }
-                break;
+                if (qty_consumed > choice.get(1)) {
+                    System.out.println("\nQuantity cannot exceed the amount you have stocked. Please try again...");
+                    continue;
+                }
+                if (qty_consumed < 1 && qty_consumed != -1) {
+                    System.out.println("\nQuantity consumed must be at least 1. Please try again...");
+                    continue;
+                }
+                if (qty_consumed == -1) {
+                    qty_consumed = 0;
+                    break;
+                } else {
+                    new_qty = old_qty - qty_consumed;
+                    // alert user that they are low if qty is below 3
+                    if (new_qty < 3) {
+                        System.out.println("\n*********************************************************");
+                        System.out.println("ALERT: You're stock is running low! You may want to add this item" +
+                                " to your shopping list!");
+                        System.out.println("*********************************************************");
+                    }
+                    break;
+                }
+            }
+            // write to consumption table
+            if (qty_consumed != 0) {
+                writeConsumption(conn, itemPK, qty_consumed);
             }
         }
-        // write to consumption table
-        writeConsumption(conn, itemPK, qty_consumed);
     }
 }

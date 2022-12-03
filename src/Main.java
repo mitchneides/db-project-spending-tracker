@@ -51,7 +51,7 @@ public class Main {
             System.out.println();
             System.out.println("1: Record expense");
             System.out.println("2: Record consumption");
-            System.out.print("Your choice: ");
+            System.out.print("\nYour choice: ");
             try {
                 choice = Integer.valueOf(userIn.nextLine());
             } catch (Exception e) {
@@ -103,8 +103,6 @@ public class Main {
                     Consumption consumption = new Consumption();
                     consumption.start(conn, userID);
 
-
-
                 }
             } else if (menuChoice == 2) {
                 // generate report
@@ -123,23 +121,3 @@ public class Main {
 
     }
 }
-
-
-
-// 1. ask for input or generate report
-//        assume input
-                // ask for consumption or add purchase
-//         assume add purchase
-// 2. Ask which category
-//        if grocery
-// 3. Ask which grocery type or create new
-// 4. Add steps 2 and 3 to receipt item table WITH TRIGGER ON RECEIPT ITEM TO UPDATE QTY IN grocery type
-//        if not grocery
-// go directly to receipt item table and create entry
-// 5. Ask which vendor or create new
-// 6. Ask for date and price
-// 7. Add everything to transacts table
-
-// consumption
-// ask for the grocery type (display list and ask for PK)
-// record to comsumption table
