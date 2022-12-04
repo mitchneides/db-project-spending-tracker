@@ -107,9 +107,7 @@ public class Main {
             } else if (menuChoice == 2) {
                 // generate report
                 Report report = new Report();
-//                report.start(conn);
-
-
+                report.start(conn, userID);
 
             } else if (menuChoice == 3) {
                 // exit system
@@ -118,6 +116,5 @@ public class Main {
                 break;
             }
         }
-
     }
 }
