@@ -86,6 +86,27 @@ public class Consumption {
         }
     }
 
+    public void deleteLastConsumption(Connection conn) throws SQLException {
+        String command = "select max(cons_id) from consumption;";
+        Statement stmt = null;
+        try {
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(command);
+            int pk = -1;
+            while (rs.next()) {
+                pk = Integer.valueOf(rs.getString(1));
+            }
+            String command2 = "DELETE FROM consumption WHERE (cons_id = " + pk +");";
+            int deleted = st.executeUpdate(command2);
+            System.out.println();
+            System.out.println("[-] Consumption deleted");
+        } catch (Exception e) {
+            System.out.println("ERROR: could not delete consumption from database");
+        } finally {
+            if (stmt != null) { stmt.close(); }
+        }
+    }
+
     public static void start(Connection conn, int userID) throws SQLException {
         while (true) {
             // get user's grocery stock (grocery type list where qty > 0)

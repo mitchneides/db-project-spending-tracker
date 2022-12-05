@@ -51,6 +51,7 @@ public class Main {
             System.out.println();
             System.out.println("1: Record expense");
             System.out.println("2: Record consumption");
+            System.out.println("3: Delete last consumption");
             System.out.print("\nYour choice: ");
             try {
                 choice = Integer.valueOf(userIn.nextLine());
@@ -63,6 +64,8 @@ public class Main {
                 return 1;
             } else if (choice == 2) {
                 return 2;
+            } else if (choice == 3) {
+              return 3;
             } else {
                 System.out.println();
                 System.out.println("Please enter one of the specified menu options");
@@ -98,11 +101,14 @@ public class Main {
                     Purchase purchase = new Purchase();
                     purchase.start(conn, userID);
 
-                } else {
+                } else if (inputChoice == 2) {
                     // input consumption
                     Consumption consumption = new Consumption();
                     consumption.start(conn, userID);
 
+                } else {
+                    Consumption consumption = new Consumption();
+                    consumption.deleteLastConsumption(conn);
                 }
             } else if (menuChoice == 2) {
                 // generate report
