@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.*;
 
 public class Consumption {
-    public static Map<Integer, List<String>> getAllStockedGroceryTypes(Connection conn, String command)
+    private static Map<Integer, List<String>> getAllStockedGroceryTypes(Connection conn, String command)
             throws SQLException {
         Statement stmt = null;
         Map<Integer, List<String>> gTypes = new HashMap<>();
@@ -28,7 +28,7 @@ public class Consumption {
         }
     }
 
-    public static List<Integer> getUserChoice(Map<Integer, List<String>> allGTypes, Connection conn) throws SQLException {
+    private static List<Integer> getUserChoice(Map<Integer, List<String>> allGTypes, Connection conn) throws SQLException {
         // list format: [id, qty]
         List<Integer> res = new ArrayList<>();
         while (true) {
@@ -70,7 +70,7 @@ public class Consumption {
         }
     }
 
-    public static void writeConsumption(Connection conn, int gtid, int qty_consumed) throws SQLException {
+    private static void writeConsumption(Connection conn, int gtid, int qty_consumed) throws SQLException {
         String command = "INSERT INTO consumption (grocery_type_id, qty_consumed) " +
                          "VALUES (" + gtid + ", " + qty_consumed + ");";
         Statement stmt = null;

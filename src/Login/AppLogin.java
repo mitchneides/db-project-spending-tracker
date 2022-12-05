@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.*;
 
 public class AppLogin {
-    public Map<Integer, String> getUsers(Connection conn, String command)
+    private Map<Integer, String> getUsers(Connection conn, String command)
             throws SQLException {
         Statement stmt = null;
         Map<Integer, String> users = new HashMap<>();
@@ -23,7 +23,7 @@ public class AppLogin {
         }
     }
 
-    public int createUser(Connection conn, String username, Double budget) throws SQLException {
+    private int createUser(Connection conn, String username, Double budget) throws SQLException {
         String command = "INSERT INTO user (name, monthly_allowance) VALUES ('" + username + "', " + budget + ")";
         Statement stmt = null;
         int userID = Integer.MIN_VALUE;
@@ -43,7 +43,7 @@ public class AppLogin {
         return userID;
     }
 
-    public int userIdentification(Map<Integer, String> allUsers, Connection conn) throws SQLException {
+    private int userIdentification(Map<Integer, String> allUsers, Connection conn) throws SQLException {
         while (true) {
             // display users
             for (Integer id : allUsers.keySet()) {

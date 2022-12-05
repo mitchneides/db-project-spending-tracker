@@ -9,7 +9,7 @@ import java.util.*;
 
 public class Report {
 
-    public static void reportRemainingMonthlyBudget(Connection conn, int userID) throws SQLException {
+    private static void reportRemainingMonthlyBudget(Connection conn, int userID) throws SQLException {
         Date date = new Date();
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
@@ -53,7 +53,7 @@ public class Report {
         }
     }
 
-    public static Map<Integer, String> getAllGroceryTypes(Connection conn, String command)
+    private static Map<Integer, String> getAllGroceryTypes(Connection conn, String command)
             throws SQLException {
         Statement stmt = null;
         Map<Integer, String> gTypes = new HashMap<>();
@@ -69,7 +69,7 @@ public class Report {
         }
     }
 
-    public static int getGTypeChoice(Map<Integer, String> allGTypes, Connection conn) throws SQLException {
+    private static int getGTypeChoice(Map<Integer, String> allGTypes, Connection conn) throws SQLException {
         while (true) {
             // display grocery types
             System.out.println();
@@ -104,7 +104,7 @@ public class Report {
         }
     }
 
-    public static void bestVendorToBuy(Connection conn) throws SQLException {
+    private static void bestVendorToBuy(Connection conn) throws SQLException {
         Map<Integer, String> allGTypes = new HashMap<>();
         try {
             String loadString = "SELECT * FROM grocery_types;";
@@ -146,7 +146,7 @@ public class Report {
         }
     }
 
-    public static int getUserChoice() {
+    private static int getUserChoice() {
         System.out.println();
         System.out.println("ID: 1 | Report: Get remaining monthly budget");
         System.out.println("ID: 2 | Report: Find best vendor to buy a given grocery type");

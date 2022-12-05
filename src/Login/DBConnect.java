@@ -15,7 +15,7 @@ public class DBConnect {
 
 
 
-    public void dbLogin() {
+    private void dbLogin() {
         Scanner userIn = new Scanner(System.in);
         System.out.print("Enter MySQL username: ");
         String uName = userIn.nextLine();
@@ -28,7 +28,7 @@ public class DBConnect {
         this.dbPassword = pWord;
     }
 
-    public Connection getConnection() throws SQLException {
+    private Connection getConnection() throws SQLException {
         Connection conn = null;
         Properties connectionProps = new Properties();
         dbLogin();

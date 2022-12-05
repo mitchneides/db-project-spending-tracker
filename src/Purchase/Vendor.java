@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class Vendor {
-    public Map<Integer, String> getVendors(Connection conn, String command)
+    private Map<Integer, String> getVendors(Connection conn, String command)
             throws SQLException {
         Statement stmt = null;
         Map<Integer, String> vendors = new HashMap<>();
@@ -25,7 +25,7 @@ public class Vendor {
         }
     }
 
-    public int createVendor(Connection conn, String vendorName) throws SQLException {
+    private int createVendor(Connection conn, String vendorName) throws SQLException {
         String command = "INSERT INTO vendor (name) VALUES ('" + vendorName + "')";
         Statement stmt = null;
         int vID = Integer.MIN_VALUE;
@@ -45,7 +45,7 @@ public class Vendor {
         return vID;
     }
 
-    public int getUserChoice(Map<Integer, String> vendors, Connection conn) throws SQLException {
+    private int getUserChoice(Map<Integer, String> vendors, Connection conn) throws SQLException {
         while (true) {
             // display all vendors
             System.out.println();

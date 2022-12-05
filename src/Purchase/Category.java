@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.*;
 
 public class Category {
-  public void displayCategoryID(Connection conn) throws SQLException {
+  private void displayCategoryID(Connection conn) throws SQLException {
     Statement stmt = null;
     String command = "SELECT * FROM item_categories";
 

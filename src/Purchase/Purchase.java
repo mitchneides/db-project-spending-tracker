@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class Purchase {
     private static final int GROCERY_ID = 3;
 
-    public static int addReceiptItem(Connection conn, String command) throws SQLException {
+    private static int addReceiptItem(Connection conn, String command) throws SQLException {
         Statement stmt = null;
         int riid = Integer.MIN_VALUE;
         try {
@@ -73,7 +73,7 @@ public class Purchase {
                 " VALUES (" + userId + ", " + vid + ", " + itemID + ", '" + date + "', " + price + ")";
     }
 
-    public static int addTransact(Connection conn, int userID, int itemID) throws SQLException {
+    private static int addTransact(Connection conn, int userID, int itemID) throws SQLException {
         String command = createTransactCommand(conn, userID, itemID);
         Statement stmt = null;
         int tid = Integer.MIN_VALUE;

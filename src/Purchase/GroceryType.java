@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class GroceryType {
-    public Map<Integer, String> getAllGroceryTypes(Connection conn, String command)
+    private Map<Integer, String> getAllGroceryTypes(Connection conn, String command)
             throws SQLException {
         Statement stmt = null;
         Map<Integer, String> gTypes = new HashMap<>();
@@ -25,7 +25,7 @@ public class GroceryType {
         }
     }
 
-    public int createGType(Connection conn, String gtName) throws SQLException {
+    private int createGType(Connection conn, String gtName) throws SQLException {
         String command = "INSERT INTO grocery_types (gt_name, remaining_qty) VALUES ('" + gtName + "', " + 0 + ")";
         Statement stmt = null;
         int gtID = Integer.MIN_VALUE;
@@ -45,7 +45,7 @@ public class GroceryType {
         return gtID;
     }
 
-    public int getUserChoice(Map<Integer, String> allGTypes, Connection conn) throws SQLException {
+    private int getUserChoice(Map<Integer, String> allGTypes, Connection conn) throws SQLException {
         while (true) {
             // display grocery types
             System.out.println();
