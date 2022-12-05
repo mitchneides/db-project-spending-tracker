@@ -94,7 +94,6 @@ public class GroceryType {
 
 
     public int getGroceryType(Connection conn) throws SQLException {
-        // find all users in db
         Map<Integer, String> allGTypes = new HashMap<>();
         try {
             String loadString = "SELECT * FROM grocery_types;";
